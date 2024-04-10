@@ -1,7 +1,7 @@
 -- movies.users definition
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(256) NOT NULL,
   `role` varchar(32) NOT NULL,
