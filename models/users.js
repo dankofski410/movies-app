@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 const config = require("../config/auth");
+require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -45,11 +46,11 @@ exports.login = function () {
             });
           }
 
-          const token = jwt.sign({ id: user.user_id }, config.secret, {
+          const token = jwt.sign({ id: user.user_id }, process.env.SECRET_KEY, {
             expiresIn: 86400, // 24 hours
           });
 
-          console.log(token)
+          console.log(token);
 
           //req.session.token = token;
 
