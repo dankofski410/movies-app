@@ -1,13 +1,11 @@
-module.exports = {
-  HOST: "localhost", // Use your test host
-  USER: "root", // Use your host username
-  PASSWORD: "", // Use your host password
-  DB: "movies", // DB I created to use
-  dialect: "mysql",
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
+export const HOST = "localhost";
+export const USER = "root";
+export const PASSWORD = "";
+export const DB = "movies";
+export const dialect = "mysql";
+export const pool = {
+  max: 5,
+  min: 0,
+  acquire: 30000,
+  idle: 10000,
 };

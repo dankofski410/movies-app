@@ -1,3 +1,1 @@
-module.exports = {
-  secret: "movie-secret-key",
-};
+export const secret = "movie-secret-key";

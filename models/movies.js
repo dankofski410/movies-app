@@ -1,9 +1,9 @@
-const sql = require("./db.js");
+import { query } from "./db.js";
 
-exports.searchTitle = function () {
+export function searchTitle () {
   return async function (req, res) {
     const title = req.params.title;
-    sql.query(
+    query(
       `SELECT * FROM movie WHERE title = '${title}'`,
       function (err, result) {
         if (err) throw err;
@@ -12,12 +12,12 @@ exports.searchTitle = function () {
       }
     );
   };
-};
+}
 
-exports.searchGenre = function () {
+export function searchGenre () {
   return async function (req, res) {
     const genre = req.params.genre;
-    sql.query(
+    query(
       `SELECT * FROM movie m
       INNER JOIN movie_genres mg ON m.movie_id = mg.movie_id
       INNER JOIN genre g ON g.genre_id = mg.genre_id
@@ -30,4 +30,4 @@ exports.searchGenre = function () {
       }
     );
   };
-};
+}
