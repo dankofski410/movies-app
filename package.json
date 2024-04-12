@@ -1,6 +1,7 @@
 {
   "name": "movie-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "Movie App",
   "main": "index.js",
   "scripts": {

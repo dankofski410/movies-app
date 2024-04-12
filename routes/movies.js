@@ -1,7 +1,10 @@
-const express = require("express");
-const Movies = require("../models/movies");
-const auth = require("../util/auth");
-console.log(auth);
+// const express = require("express");
+// const Movies = require("../models/movies");
+// const auth = require("../util/auth");
+// console.log(auth);
+import { Router } from "express";
+import { searchTitle, searchGenre } from "../models/movies.js";
+import { verifyToken } from "../util/auth.js";
 
 // module.exports = function (app) {
 //   app.use(function (req, res, next) {
@@ -9,11 +12,11 @@ console.log(auth);
 //     next();
 //   });
 
-const router = new express.Router();
+const router = new Router();
 
-router.get("/search/title/:title", Movies.searchTitle());
+router.get("/search/title/:title", searchTitle());
 
-router.get("/search/genre/:genre", auth.verifyToken, Movies.searchGenre());
+router.get("/search/genre/:genre", verifyToken, searchGenre());
 // };
 
-module.exports = router;
+export default router;

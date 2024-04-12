@@ -1,10 +1,15 @@
-const jwt = require("jsonwebtoken");
-const config = require("../config/auth");
+// const jwt = require("jsonwebtoken");
+// const config = require("../config/auth");
+//const config = require("../config/auth");
+// import verify from "jsonwebtoken";
+// import { secret } from "../config/auth";
+import jwt from "jsonwebtoken";
+const { verify } = jwt;
 
 // const db = require("../models");
 // const User = db.user;
 
-exports.verifyToken = (req, res, next) => {
+export function verifyToken(req, res, next) {
   //let token = req.session.token;
   let headers = req.headers;
   let token = headers.token;
@@ -27,7 +32,7 @@ exports.verifyToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+  verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).send({
         message: "Unauthorized!",
@@ -36,7 +41,7 @@ exports.verifyToken = (req, res, next) => {
     req.userId = decoded.id;
     next();
   });
-};
+}
 
 // const auth = {
 //   verifyToken,

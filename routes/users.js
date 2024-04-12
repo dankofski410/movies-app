@@ -1,10 +1,12 @@
-const express = require("express");
-const Users = require("../models/users");
+// const express = require("express");
+// const Users = require("../models/users");
+import { Router } from "express";
+import { createUser, login } from "../models/users.js";
 
-const router = new express.Router();
+const router = new Router();
 
-router.post("/users/create", Users.createUser());
+router.post("/users/create", createUser());
 
-router.post("/users/login", Users.login());
+router.post("/users/login", login());
 
-module.exports = router;
+export default router;

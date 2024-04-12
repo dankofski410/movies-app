@@ -1,14 +1,25 @@
-const sql = require("./db.js");
-const config = require("../config/auth");
-require("dotenv").config();
+// const sql = require("./db.js");
+//const config = require("../config/auth");
+import connection from "./db.js";
+import dotenv from "dotenv";
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+dotenv.config();
 
-exports.createUser = function () {
+// const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcryptjs");
+// import { sign } from "jsonwebtoken";
+// import { hashSync, compareSync } from "bcryptjs";
+import pkg from "bcryptjs";
+const { hashSync, compareSync } = pkg;
+import jwt from "jsonwebtoken";
+const { sign } = jwt;
+
+
+
+export function createUser() {
   return async function (req, res) {
-    const password = bcrypt.hashSync(req.body.password, 8);
-    sql.query(
+    const password = hashSync(req.body.password, 8);
+    connection.query(
       `INSERT INTO users (username, password, role, email) VALUES
       ('${req.body.username}', '${password}', '${req.body.role}', '${req.body.email}')`,
       function (err, result) {
@@ -20,14 +31,14 @@ exports.createUser = function () {
   };
 };
 
-exports.login = function () {
+export function login() {
   return async function (req, res) {
     const username = req.body.username;
     console.log(username);
     const password = req.body.password;
     let user;
     try {
-      sql.query(
+      connection.query(
         `SELECT * FROM users WHERE username = '${username}'`,
         function (err, result) {
           if (err) throw err;
@@ -38,7 +49,7 @@ exports.login = function () {
             return res.status(404).send({ message: "User Not found." });
           }
 
-          const passwordIsValid = bcrypt.compareSync(password, user.password);
+          const passwordIsValid = compareSync(password, user.password);
 
           if (!passwordIsValid) {
             return res.status(401).send({
@@ -46,7 +57,7 @@ exports.login = function () {
             });
           }
 
-          const token = jwt.sign({ id: user.user_id }, process.env.SECRET_KEY, {
+          const token = sign({ id: user.user_id }, process.env.SECRET_KEY, {
             expiresIn: 86400, // 24 hours
           });
 
@@ -69,7 +80,7 @@ exports.login = function () {
   };
 };
 
-exports.logout = async (req, res) => {
+export async function logout (req, res) {
   try {
     req.session = null;
     return res.status(200).send({

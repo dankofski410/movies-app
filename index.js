@@ -1,5 +1,9 @@
-const express = require("express");
-const cors = require("cors");
+// const express = require("express");
+// const cors = require("cors");
+import express, { json, urlencoded } from "express";
+import cors from "cors";
+import moviesRouter from "./routes/movies.js";
+import usersRouter from "./routes/users.js";
 
 const app = express();
 
@@ -10,20 +14,20 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Movie App" });
 });
 
-const moviesRouter = require("./routes/movies.js");
-const usersRouter = require("./routes/users.js");
+// const moviesRouter = require("./routes/movies.js");
+// const usersRouter = require("./routes/users.js");
 
-app.use(express.json());
+app.use(json());
 app.use(moviesRouter);
 app.use(usersRouter);
 

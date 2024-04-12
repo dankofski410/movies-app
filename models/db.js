@@ -1,9 +1,13 @@
-const mysql = require("mysql");
-const dbConfig = require("../config/config.js");
-require("dotenv").config();
+// const mysql = require("mysql");
+// const dbConfig = require("../config/config.js");
+import { createConnection } from "mysql";
+// require("dotenv").config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Create a connection to the database
-const connection = mysql.createConnection({
+const connection = createConnection({
   host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,
@@ -11,10 +15,10 @@ const connection = mysql.createConnection({
 });
 
 // open the MySQL connection
-connection.connect(error => {
+connection.connect((error) => {
   if (error) throw error;
   console.log("Successfully connected to the database.");
 });
 
-module.exports = connection;
-
+// module.exports = connection;
+export default connection;
