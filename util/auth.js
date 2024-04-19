@@ -1,13 +1,5 @@
-// const jwt = require("jsonwebtoken");
-// const config = require("../config/auth");
-//const config = require("../config/auth");
-// import verify from "jsonwebtoken";
-// import { secret } from "../config/auth";
 import jwt from "jsonwebtoken";
 const { verify } = jwt;
-
-// const db = require("../models");
-// const User = db.user;
 
 export function verifyToken(req, res, next) {
   //let token = req.session.token;
@@ -42,8 +34,3 @@ export function verifyToken(req, res, next) {
     next();
   });
 }
-
-// const auth = {
-//   verifyToken,
-// };
-// module.exports = auth;

@@ -1,7 +1,4 @@
-// const mysql = require("mysql");
-// const dbConfig = require("../config/config.js");
 import { createConnection } from "mysql";
-// require("dotenv").config();
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -20,5 +17,4 @@ connection.connect((error) => {
   console.log("Successfully connected to the database.");
 });
 
-// module.exports = connection;
 export default connection;

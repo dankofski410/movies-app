@@ -1,5 +1,3 @@
-// const express = require("express");
-// const Users = require("../models/users");
 import { Router } from "express";
 import { createUser, login } from "../models/users.js";
 

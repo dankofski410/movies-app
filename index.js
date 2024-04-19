@@ -1,5 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
 import express, { json, urlencoded } from "express";
 import cors from "cors";
 import moviesRouter from "./routes/movies.js";
@@ -23,9 +21,6 @@ app.use(urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Movie App" });
 });
-
-// const moviesRouter = require("./routes/movies.js");
-// const usersRouter = require("./routes/users.js");
 
 app.use(json());
 app.use(moviesRouter);
